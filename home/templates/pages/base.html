@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static  %} 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>  
+</head>
+<body>
+  <a href="{% url 'body' %}">body</a>
+  <p> <a href="{% url 'register' %}">register</a></p>
+  <div>
+          {% if user.username %}
+            <p>Xin chao</p>
+            <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+            <button type="submit">Logout</button>
+              </form>
+
+          {% else %}
+          <p><a href="{% url 'register' %}">Dang ki</a></p><p><a href="{% url 'login' %}">Dang nhap</a></p>   
+          {% endif %}
+        <
+      </div>
+  <p>
+  <a href="/blog">Bai viet</a>
+  {% block content %}
+  {% endblock %}
+  </p>
+ 
+</body>
+</html>
