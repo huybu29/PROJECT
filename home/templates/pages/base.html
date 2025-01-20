@@ -4,29 +4,73 @@
   {% load static  %} 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}{% endblock %}</title>  
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  
 </head>
-<body>
-  <a href="{% url 'body' %}">body</a>
-  <p> <a href="{% url 'register' %}">register</a></p>
-  <div>
-          {% if user.username %}
-            <p>Xin chao</p>
-            <form action="{% url 'logout' %}" method="post">
+<body style="background-color: rgb(220, 234, 247); opacity: 0.9;">
+  <div class="header-container">
+    <div class="access-container">
+      <div>Mua hàng và CSKH: 1800 6609</div>
+      <div>Đặt địa chỉ để mua hàng siêu tốc</div>
+        {% if user.username %}
+        <div>XIN CHAO QUY KHACH</div>
+        <form action="{% url 'logout' %}" method="post">
           {% csrf_token %}
-            <button type="submit">Logout</button>
-              </form>
+          <button type="submit">Logout</button>
+        </form>
+        {% else %}
+          <div><a href="{% url 'register' %}">Dang ki</a><a href="{% url 'login' %}">Dang nhap</a></div>   
+        {% endif %}   
+      </div>         
+    
+   <div class="searchbar-container">
+    <div><a href="{% url 'bl' %}"> <img style="width:134px; height:48px; " src="{% get_media_prefix %}logo-concung.png" ></a></div>
+   
+    <div style="display:flex; align-items:center; flex:1; justify-content: center "><input class="search-bar" placeholder="Tim kiem"></div>
+    <div class="cartNoti">
+      <div><a href=""><img style="width:75px" src="{% get_media_prefix %}images-removebg-preview.png" alt="Image"></div>
+      <div><img style="width:60px" src="{% get_media_prefix %}3119338.png"  ></a></div>
+    </div> 
+   </div>
+  </div>
+   
+  
+ </div>
 
-          {% else %}
-          <p><a href="{% url 'register' %}">Dang ki</a></p><p><a href="{% url 'login' %}">Dang nhap</a></p>   
-          {% endif %}
-        <
-      </div>
-  <p>
-  <a href="/blog">Bai viet</a>
+ <div class="body">
+  
+ 
   {% block content %}
   {% endblock %}
-  </p>
- 
+  
+  
+</div>
+
+  <div class="footer-container">
+    <div>
+      Công Ty Cổ Phần Con Cưng
+      Thành viên của Tập đoàn CCI Group
+      Email: cskh@concung.com
+      Điện thoại: 028 7300 6609
+      ĐKKD: 66 Nguyễn Du, phường Bến Nghé, Quận 1, Tp. Hồ Chí Minh
+      Văn phòng: Tầng 14 Tòa nhà Phú Mỹ Hưng Tower, 08 Hoàng Văn Thái, P.Tân Phú, Q.7, HCM
+    </div>
+    <div>
+      Về Con Cưng
+      Giới thiệu về Con Cưng
+      Tuyển dụng Khối Văn Phòng
+      Tuyển dụng Khối Siêu Thị
+      Chính sách bảo mật
+      Điều khoản chung
+      Hỗ Trợ Khách Hàng
+      Tra cứu hoá đơn
+      Mua & Giao nhận Online
+      Tin Khuyến Mãi
+      Qui định & hình thức thanh toán
+      Bảo hành & Bảo trì
+      Đổi trả & Hoàn tiền
+    </div>
+  </div> 
 </body>
 </html>

@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% load static  %} 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
-<body>
+<body style="height: 5000px; background-color: lightblue;">
+  <div class="header-container">
+    <div><a href="{% url 'bl' %}"> <img style="width:134px; height:48px; " src="{% get_media_prefix %}logo-concung.png" ></a></div>
+    <div><strong>DANG NHAP</strong></div>
+  </div>
+<div class="login-container">
     <center>
       <form action='.' method='POST'>
         {% csrf_token %}
@@ -13,5 +20,6 @@
         <input type="submit" value="Dang ki">
       </form>
     </center>
-</body>
+  </div
+</div>
 </html>

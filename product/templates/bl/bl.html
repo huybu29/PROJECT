@@ -1,17 +1,46 @@
 {% extends "pages/base.html" %}
 
-{% block title %} Blog {% endblock %}
+{% block title %} body{% endblock %}
 {% block content %} 
-{% for post in Post %}
-<h4>{{ post.date|date:"d-m-Y" }} <a href="/blog/{{ post.id }}">{{ post.title }}</a></h4>
-{% if post.image %}
-    <img src="{{ post.image.url }}" >
+{% load humanize %}
+<div class="sidebar-container">
+    <div>MILK</div>
+    <div>MILK</div>
+    <div>MILK</div>
+  </div>
+<div class="shop">
+{% for product in Product %}
+<div class="product-container">
+{% if product.image %}
+
+    <img class="product-img" src="{{ product.image.url }}" >
 {% else %}
     <p>No image available</p>
 {% endif %}
+
+<div><a href="/blog/{{ product.id }}">{{ product.title }}</a></div>
+<p>{{product.price|intcomma}} đ</p>
+</div>  
 {% endfor %}
-<br/>
+
 {% if page_obj.has_next %}
 <a href="{{request.path}}?page={{page_obj.next_page_number}}">Tiep theo</a>
 {% endif %}
+{% for product in Product %}
+<div class="product-container">
+    {% if product.image %}
+
+    <div class="product-img-container"><img class="product-img" src="{{ product.image.url }}" ></div>
+{% else %}
+    <p>No image available</p>
+{% endif %}
+<div> <a href="/blog/{{ product.id }}">{{ product.title }}</a></div>
+<p>{{product.price|intcomma}} đ</p>
+</div>
+{% endfor %}
+
+{% if page_obj.has_next %}
+<a href="{{request.path}}?page={{page_obj.next_page_number}}">Tiep theo</a>
+{% endif %}
+</div>
 {% endblock %}

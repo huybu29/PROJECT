@@ -2,22 +2,35 @@
 
 {% block title %}{{post.title}}{% endblock %}
 {% block content %} 
-  <h3><a href='bl/{{post.id}}'>{{post.title}}</a></h3>
-  <img src="{{post.image.url}}">
-  <h6>on {{post.date}}</h6>
-  {{post.body|safe|linebreaks}} 
-{% for comment in post.comments.all %}
-  <h4><strong>{{comment.author}}</strong></h4>
-  <h6><p>{{comment.date}}</p></h6>
-  <p>{{comment.body|linebreaks}}</p>
+{% load humanize %}
+<div class="product">
+  <div style="display: flex; flex-direction: row;">
+  <div><img class="product-img-f" src="{{product.image.url}}"></div>
+  <div class="product-name">{{product.body|safe|linebreaks}}
+    <p>{{product.price|intcomma}} Đ</p>
+    So luong
+    <input type="number" value="0" min="1" class="quanity">
+    <button type="submit" class="submit">Them vao gio hang </button>
+    <button>mua ngay</button>
+  </div>
+</div>
+  <div style="font-size:small;">
+{% for comment in product.comments.all %}
+  <div><strong>{{comment.author}}</strong></div>
+  <div><p>{{comment.date}}</p></div>
+  <div>{{comment.body|linebreaks}}</div>
+  
 {% endfor %}
+
 {% if user.username %}
-  <form action="{% url 'post' post.id %}" method='POST'>
+  <form action="{% url 'product' product.id %}" method='POST'>
   {% csrf_token %}
-  <p><label>Binh luan:</label></p>
+  <div><label>Binh luan:</label></div>
   {{form.body}}
-  <br/>
+  
   <input type="submit" value="Binh luan">
   </form>
+</div>
 {% endif %}
+</div>
 {% endblock %}      

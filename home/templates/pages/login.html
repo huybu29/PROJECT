@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% load static  %} 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
-<body>
-    <center>
+<body style="height: 5000px; background-color: lightblue;" >
+  <div class="header-container">
+    <div><a href="{% url 'bl' %}"> <img style="width:134px; height:48px; " src="{% get_media_prefix %}logo-concung.png" ></a></div>
+    <div><strong>DANG NHAP</strong></div>
+  </div>
       <form method='POST'>
+        <div class="login-container">
         {% csrf_token %}
         {% for key,value in form.errors.items %}
           {{value}}
         {% endfor %}
-        <p><label>Tai khoan : </label>{{form.username}}</p>
-        <p><label>Mat khau : </label>{{form.password}}</p>
+        <div><label>Tai khoan : </label>{{form.username}}</div>
+        <div><label>Mat khau : </label>{{form.password}}</div>
         <input type="hidden" name="next" value="/">
         <input type="submit" value="Dang nhap">
+      </div>
       </form>
-    </center>
+    
 </body>
 </html>

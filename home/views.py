@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import RegistrationForm
 from django.http import HttpResponseRedirect
+
  # Create your views here.
 def index(request):
   return render(request, 'pages/product.html')
