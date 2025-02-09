@@ -27,9 +27,12 @@
    <div class="searchbar-container">
     <div><a href="{% url 'bl' %}"> <img style="width:134px; height:48px; " src="{% get_media_prefix %}logo-concung.png" ></a></div>
    
-    <div style="display:flex; align-items:center; flex:1; justify-content: center "><input class="search-bar" placeholder="Tim kiem"></div>
+    <div style="display:flex; align-items:center; flex:1; justify-content: center "><form method="GET" action="{% url 'product_list' %}">
+    <input type="text" name="q" placeholder="Tìm kiếm sản phẩm..." value="{{ query }}">
+    <button type="submit">Tìm kiếm</button>
+</form></div>
     <div class="cartNoti">
-      <div><a href=""><img style="width:75px" src="{% get_media_prefix %}images-removebg-preview.png" alt="Image"></div>
+      <div><a href="{% url 'cart' %}"><img style="width:75px" src="{% get_media_prefix %}images-removebg-preview.png" alt="Image"></div>
       <div><img style="width:60px" src="{% get_media_prefix %}3119338.png"  ></a></div>
     </div> 
    </div>
@@ -38,14 +41,11 @@
   
  </div>
 
- <div class="body">
+ 
   
  
   {% block content %}
   {% endblock %}
-  
-  
-</div>
 
   <div class="footer-container">
     <div>

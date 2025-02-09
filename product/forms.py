@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment
+from .models import Comment,Product,CartItem,Cart
 class CommentForm(forms.ModelForm):
   def __init__(self, *arg,**kwargs):
     self.author=kwargs.pop('author',None)
@@ -13,3 +13,6 @@ class CommentForm(forms.ModelForm):
   class Meta:
     model =Comment
     fields = ["body"]
+
+
+

@@ -1,23 +1,42 @@
 {% extends "pages/base.html" %}
-
-{% block title %}{{post.title}}{% endblock %}
+{% block title %} body{% endblock %}
 {% block content %} 
-<h1>Your Cart</h1>
-<table>
-    <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Total Price</th>
-    </tr>
-    {% for item in cart.items.all %}
-    <tr>
-        <td>{{ item.product.name }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>${{ item.total_price }}</td>
-    </tr>
+{% load humanize %}
+<h1>Giỏ hàng</h1>
+{% if cart_items %}
+<div class="cart-container">
+
+    <div class="item-list">
+    {% for item in cart_items %}
+    
+        {% if item.product.image %}
+        <div class="item-container">
+            <img class="item-img" src="{{ item.product.image.url }}" >
+        {% else %}
+            <p>No image available</p>
+        {% endif %}
+        
+        <div style="flex: 4;"><a href="/blog/{{item.product.id }}">{{ item.product.title }}</a></div>
+        <div style="flex: 1;"><p>{{item.product.price}}</p></div>
+        <div style="flex: 1;"><p>{{item.quantity}}</p></div>
+        <div style="flex: 1;"><p>{{item.product.price|intcomma}} đ</p></div>
+        </div>
+        <div><a href="{% url 'delete' item.product.id %}">delete</a></div>     
     {% endfor %}
-</table>
-<p>Total Cost: ${{ cart.total_cost }}</p>
-
-
-{% endblock %}      
+    </div>
+    <div class="checkout">
+        <p>Order summary</p>
+        <div>Items: {{ total_price }} VNĐ</div>
+        <div>Shipping: </div>
+        <div>Tax (10%):{{ tax }}</div>
+        <div>------------------</div>
+        <div>Total: </div>
+    </div>
+    </div>
+     
+    {% else %}
+        <p>Giỏ hàng của bạn đang trống.</p>
+    {% endif %}
+    
+</div>
+{% endblock %}

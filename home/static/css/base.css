@@ -41,7 +41,7 @@ body{
 .body{
   display: flex;
   flex-direction: row;
-  
+
 }
 .sidebar-container{
   display: flex;
@@ -49,7 +49,7 @@ body{
   padding: 10px;
   border: 1px solid black;
   flex:1;
-  height: fit-content
+  height: fit-content 
 }
 .shop{
   display: grid;
@@ -76,6 +76,7 @@ body{
   width: 150px;
   height: 200px;
 }
+
 .cartNoti{
   display: flex;
   flex-direction: row;
@@ -106,4 +107,30 @@ body{
 }
 .product-name{
   font-size:x-large;
+}
+.cart-container{
+  display: flex;
+  flex-direction: row  ;
+  justify-content: space-between;
+  background-color: rgb(137, 186, 250);
+}
+.item-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 1000px;
+}
+.item-img{
+  width: 180px;
+  height: 180px;  
+  object-fit:contain;
+  flex: 1;
+}
+.checkout{
+ display: flex;
+ flex-direction: column;
+ border: 1px solid grey;
+ 
+ flex: 0.5;
+ align-items: center;
 }
