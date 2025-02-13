@@ -14,15 +14,15 @@
   </div>
       <form method='POST'>
         <div class="login-container">
-        {% csrf_token %}
-        {% for key,value in form.errors.items %}
-          {{value}}
-        {% endfor %}
+          {% csrf_token %}
+          {% for key,value in form.errors.items %}
+            {{value}}
+          {% endfor %}
         <div><label>Tai khoan : </label>{{form.username}}</div>
         <div><label>Mat khau : </label>{{form.password}}</div>
-        <input type="hidden" name="next" value="/">
+        <input type="hidden" name="next" value="/blog">
         <input type="submit" value="Dang nhap">
-      </div>
+        </div>
       </form>
     
 </body>

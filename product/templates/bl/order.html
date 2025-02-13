@@ -1,0 +1,14 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Đặt hàng thành công{% endblock %}
+
+{% block content %}
+<h2>Đặt hàng thành công!</h2>
+
+<p><strong>Mã đơn hàng:</strong> {{ order.id }}</p>
+<p><strong>Ngày đặt hàng:</strong> {{ order.created_at }}</p>
+<p><strong>Địa chỉ giao hàng:</strong> {{ order.address }}</p>
+<p><strong>Tổng tiền:</strong> {{ order.total_price }} Đ</p>
+
+<a href="{% url 'bl' %}" >Tiếp tục mua sắm</a>
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends "pages/base.html" %}
 
-{% block title %}{{post.title}}{% endblock %}
+{% block title %}{{post.body}}{% endblock %}
 {% block content %} 
 {% load humanize %}
 <div class="product">
@@ -21,9 +21,9 @@
 </div>
   <div style="font-size:small;">
 {% for comment in product.comments.all %}
-  <div><strong>{{comment.author}}</strong></div>
-  <div><p>{{comment.date}}</p></div>
-  <div>{{comment.body|linebreaks}}</div>
+  <div><h2>{{comment.author}}</h2></div>
+  <div>{{comment.date}}</div>
+  <div><h4>{{comment.body|linebreaks}}</h4></div>
   
 {% endfor %}
 

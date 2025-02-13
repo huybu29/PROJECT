@@ -2,40 +2,53 @@
 {% block title %} body{% endblock %}
 {% block content %} 
 {% load humanize %}
-<h1>Giỏ hàng</h1>
-{% if cart_items %}
-<div class="cart-container">
 
+{% if cart_items %}
+
+<div class="cart-container">
+   
     <div class="item-list">
+        <div class="item-container" style="display: flex;">
+            <div style="flex: 10;border:1px solid black; text-align: center;"><h2>Sản phẩm</h2></div>
+            <div style="flex: 1.5;border:1px solid black;text-align: center;"><h2>Giá tiền</h2></div>
+            <div style="flex: 1.5;border:1px solid black;text-align: center;"><h2>Số lượng</h2></div>
+            <div style="flex: 1.5;border:1px solid black;text-align: center;"><h2>Tổng</h2></div>
+        </div>
     {% for item in cart_items %}
-    
         {% if item.product.image %}
         <div class="item-container">
-            <img class="item-img" src="{{ item.product.image.url }}" >
+            <div style="border:1px solid black;"><img  class="item-img" src="{{ item.product.image.url }}" ></div>
         {% else %}
             <p>No image available</p>
         {% endif %}
         
-        <div style="flex: 4;"><a href="/blog/{{item.product.id }}">{{ item.product.title }}</a></div>
-        <div style="flex: 1;"><p>{{item.product.price}}</p></div>
-        <div style="flex: 1;"><p>{{item.quantity}}</p></div>
-        <div style="flex: 1;"><p>{{item.product.price|intcomma}} đ</p></div>
+        <div style="flex: 4.9;border:1px solid black;"><a href="/blog/{{item.product.id }}">{{ item.product.body }}</a>
+        <div><a href="{% url 'delete' item.product.id %}">Xóa sản phẩm</a></div>     </div>
+        <div style="flex: 1;border:1px solid black; text-align: center;"><p>{{item.product.price|intcomma}} đ</p></div>
+        <div style="flex: 1;text-align: center;border:1px solid black;"><p>{{item.quantity}}</p></div>
+        <div style="flex: 1;text-align: center;border:1px solid black;"><p>{{item.product.price|intcomma}} đ</p></div>
         </div>
-        <div><a href="{% url 'delete' item.product.id %}">delete</a></div>     
+        
     {% endfor %}
     </div>
     <div class="checkout">
         <p>Order summary</p>
-        <div>Items: {{ total_price }} VNĐ</div>
-        <div>Shipping: </div>
-        <div>Tax (10%):{{ tax }}</div>
+        <div>Items: {{ total_price|intcomma }} đ</div>
+        <div>Shipping: {{ tax|intcomma }} đ</div>
         <div>------------------</div>
-        <div>Total: </div>
+        <div>Total:{{ cart.total|intcomma}} đ</div>
     </div>
-    </div>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="shipping_address">Địa chỉ giao hàng:</label><br>
+        <textarea name="shipping_address" rows="3" cols="50" required></textarea><br><br>
+
+        <button type="submit" class="btn btn-success">Xác nhận đặt hàng</button>
+    </form>
      
     {% else %}
-        <p>Giỏ hàng của bạn đang trống.</p>
+        <div style="margin-top: 110px;"><h1>Giỏ hàng của bạn đang trống.</h1></div>
     {% endif %}
     
 </div>

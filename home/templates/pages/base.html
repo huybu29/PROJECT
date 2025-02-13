@@ -12,7 +12,7 @@
   <div class="header-container">
     <div class="access-container">
       <div>Mua hàng và CSKH: 1800 6609</div>
-      <div>Đặt địa chỉ để mua hàng siêu tốc</div>
+      <div>Đăng nhập để mua hàng</div>
         {% if user.username %}
         <div>XIN CHAO QUY KHACH</div>
         <form action="{% url 'logout' %}" method="post">
@@ -25,24 +25,25 @@
       </div>         
     
    <div class="searchbar-container">
-    <div><a href="{% url 'bl' %}"> <img style="width:134px; height:48px; " src="{% get_media_prefix %}logo-concung.png" ></a></div>
+    <div><a href="{% url 'bl' %}"> <img style="width:75px; height:75px; object-fit:cover; " src="{% get_media_prefix %}Xanh_dương_pastel_Cầu_vồng_Chương_trình_Đọc_viết_Logo-removebg-preview.png" ></a>
+    </div>
    
-    <div style="display:flex; align-items:center; flex:1; justify-content: center "><form method="GET" action="{% url 'product_list' %}">
-    <input type="text" name="q" placeholder="Tìm kiếm sản phẩm..." value="{{ query }}">
-    <button type="submit">Tìm kiếm</button>
-</form></div>
+    <div style="display:flex; align-items:center; flex:1; justify-content: center ">
+      <form method="GET" action="{% url 'product_list' %}" class="search-bar">
+        <input class="search-bar"  type="text" name="q" placeholder="Tìm kiếm sản phẩm..." value="{{ query }}">
+      </form>
+    </div>
     <div class="cartNoti">
-      <div><a href="{% url 'cart' %}"><img style="width:75px" src="{% get_media_prefix %}images-removebg-preview.png" alt="Image"></div>
-      <div><img style="width:60px" src="{% get_media_prefix %}3119338.png"  ></a></div>
+    {% if user.username %}
+      <div><a href="{% url 'cart' %}"><img style="width:75px" src="{% get_media_prefix %}images-removebg-preview.png" alt="Image"></a>
+      </div>
+      <div><a href="{% url 'order' %}"><img style="width:75px" src="{% get_media_prefix %}3119338.png" alt="Image"></a>
+    {%endif%}
+      
+      </div>
     </div> 
    </div>
-  </div>
-   
-  
- </div>
-
- 
-  
+  </div> 
  
   {% block content %}
   {% endblock %}

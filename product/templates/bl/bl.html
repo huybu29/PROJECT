@@ -4,58 +4,42 @@
 {% block content %} 
 {% load humanize %}
 <div class="body">
-<div class="sidebar-container">
-    <div>MILK</div>
-    <div>MILK</div>
-    <div>MILK</div>
-  </div>
-<div class="shop">
+    <div class="sidebar-container">
+        {% for cate in Category %}
+        <div>{{cate.id}}. <a href="{% url 'product_by_filter' cate.id %}">{{cate.name}}</a></div>
+        
+        {% endfor%}
+    </div>
+    <div class="shop">
+    {% if Products or query%}
+        {% if Products %}
+        {% for product in Products %}
+        <div class="product-container">
+        {% if product.image %}
+            <img class="product-img" src="{{ product.image.url }}" >
+        {% else %}
+            <p>No image available</p>
+        {% endif %}
+            <div><a href="/blog/{{ product.id }}">{{ product.body }}</a></div>
+            <p>{{product.price|intcomma}} đ</p>
+        </div>  
+        {% endfor %}
+        {% else %}
+            <p>Không tìm thấy sản phẩm nào.</p>
+        {% endif %}
+    {%endif%}
+        {% for product in Product %}
+            <div class="product-container">
+        {% if product.image %}
+            <img class="product-img" src="{{ product.image.url }}" >
+        {% else %}
+            <p>No image available</p>
+        {% endif %}
+        <div><a href="/blog/{{ product.id }}">{{ product.body }}</a></div>
+        <p>{{product.price|intcomma}} đ</p>
+        </div>  
+    {% endfor %}    
 
-
-{% if Products %}
-    <h2>Kết quả tìm kiếm cho: "{{ query }}"</h2>
-    {% for product in Products %}
-        <div>
-            <a href="/blog/{{ product.id }}">{{ product.title }}</a>
-            <p>Giá: {{ product.price|intcomma }} đ</p>
-        </div>
-    {% endfor %}
-{% else %}
-    <p>Không tìm thấy sản phẩm nào.</p>
-{% endif %}
-{% for product in Product %}
-<div class="product-container">
-{% if product.image %}
-
-    <img class="product-img" src="{{ product.image.url }}" >
-{% else %}
-    <p>No image available</p>
-{% endif %}
-
-<div><a href="/blog/{{ product.id }}">{{ product.title }}</a></div>
-<p>{{product.price|intcomma}} đ</p>
-</div>  
-{% endfor %}
-
-{% if page_obj.has_next %}
-<a href="{{request.path}}?page={{page_obj.next_page_number}}">Tiep theo</a>
-{% endif %}
-{% for product in Product %}
-<div class="product-container">
-    {% if product.image %}
-
-    <div class="product-img-container"><img class="product-img" src="{{ product.image.url }}" ></div>
-{% else %}
-    <p>No image available</p>
-{% endif %}
-<div> <a href="/blog/{{ product.id }}">{{ product.title }}</a></div>
-<p>{{product.price|intcomma}} đ</p>
-</div>
-{% endfor %}
-
-{% if page_obj.has_next %}
-<a href="{{request.path}}?page={{page_obj.next_page_number}}">Tiep theo</a>
-{% endif %}
-</div>
+    </div>
 </div>
 {% endblock %}
