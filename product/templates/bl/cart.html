@@ -36,16 +36,17 @@
         <div>Items: {{ total_price|intcomma }} đ</div>
         <div>Shipping: {{ tax|intcomma }} đ</div>
         <div>------------------</div>
-        <div>Total:{{ cart.total|intcomma}} đ</div>
+        <div>Total:{{ total_price|intcomma}} đ</div>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label for="shipping_address">Địa chỉ giao hàng:</label><br>
+            <textarea name="shipping_address" rows="3" cols="50" required></textarea><br><br>
+    
+            <button type="submit" class="btn btn-success">Xác nhận đặt hàng</button>
+        </form>
     </div>
-    <form method="POST">
-        {% csrf_token %}
-        
-        <label for="shipping_address">Địa chỉ giao hàng:</label><br>
-        <textarea name="shipping_address" rows="3" cols="50" required></textarea><br><br>
-
-        <button type="submit" class="btn btn-success">Xác nhận đặt hàng</button>
-    </form>
+    
      
     {% else %}
         <div style="margin-top: 110px;"><h1>Giỏ hàng của bạn đang trống.</h1></div>
