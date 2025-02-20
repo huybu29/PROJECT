@@ -9,6 +9,7 @@
   <div class="product-name">{{product.body|safe|linebreaks}}
     <p>{{product.price|intcomma}} Đ</p>
    <h2>{{ product.name }}</h2>
+   
  <form action="{% url 'add_to_cart' product.id %}" method="POST">
     {% csrf_token %}
     <label for="quantity">Số lượng:</label>

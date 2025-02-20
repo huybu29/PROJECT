@@ -73,29 +73,37 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
 
+from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponseRedirect
+from .models import Product, Cart, CartItem
+
 def add_to_cart(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/login/')
+    
     product = get_object_or_404(Product, pk=pk)
     cart, created = Cart.objects.get_or_create(user=request.user)
     
     if request.method == "POST":
-        quantity = int(request.POST.get("quantity", 1))  
+        quantity = int(request.POST.get("quantity", 1))
         cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-
         if created:
             cart_item.quantity = quantity
         else:
-            cart_item.quantity += quantity 
+            cart_item.quantity += quantity
         cart_item.save()
     return HttpResponseRedirect('/')
+
 def buy(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('/login/')
+    
     product = get_object_or_404(Product, pk=pk)
     cart, created = Cart.objects.get_or_create(user=request.user)
-  
-       
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-        
     cart_item.save()
     return HttpResponseRedirect('/blog/cart')
+
 def delete_from_cart(request,pk):
     cart=get_object_or_404(Cart,user=request.user)
     cart_item= get_object_or_404(CartItem,cart=cart,product_id=pk)

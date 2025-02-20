@@ -5,8 +5,8 @@ from django.core.exceptions import ObjectDoesNotExist
 class RegistrationForm(forms.Form):
   username = forms.CharField(label='Account', max_length=30)
   email= forms.EmailField(label='Email')
-  password1 =forms.CharField(label='pass', widget=forms.PasswordInput())
-  password2= forms.CharField(label='reo pass', widget=forms.PasswordInput())
+  password1 =forms.CharField(label='password', widget=forms.PasswordInput())
+  password2= forms.CharField(label='re pass', widget=forms.PasswordInput())
   
   def clean_password2(self):
     if 'password1' in self.cleaned_data:
